@@ -13,6 +13,7 @@ function Register() {
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    setloading(true);
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       const user = auth.currentUser;
@@ -27,10 +28,12 @@ function Register() {
       setPassword("");
       setFname("");
       setLname("");
+       setloading(false);
       toast.success("User Registered Successfully!!", {
         position: "top-center",
       });
     } catch (error) {
+       setloading(false);
       toast.error("User already Register", {
         position: "bottom-center",
       });
@@ -38,7 +41,7 @@ function Register() {
   };
 
   return (<>
-    {loading?<form onSubmit={handleRegister}>
+    {!loading?<form onSubmit={handleRegister}>
       <h3>Sign Up</h3>
 
       <div className="mb-3">
