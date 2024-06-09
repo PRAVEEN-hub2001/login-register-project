@@ -9,6 +9,7 @@ function Register() {
   const [password, setPassword] = useState("");
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
+  const [loading, setloading]=useState(false);
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -30,14 +31,14 @@ function Register() {
         position: "top-center",
       });
     } catch (error) {
-      toast.error(error.message, {
+      toast.error("User already Register", {
         position: "bottom-center",
       });
     }
   };
 
-  return (
-    <form onSubmit={handleRegister}>
+  return (<>
+    {loading?<form onSubmit={handleRegister}>
       <h3>Sign Up</h3>
 
       <div className="mb-3">
@@ -91,7 +92,7 @@ function Register() {
       <p className="forgot-password text-right">
         Already registered <a href="/login">Login</a>
       </p>
-    </form>
+    </form>:<p>Loading</p>}</>
   );
 }
 export default Register;
